@@ -19,8 +19,7 @@
         "assets": ["apps/facade/src/favicon.ico", "apps/facade/src/assets"],
         "styles": [
           "apps/facade/src/styles.scss",
-          "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
-          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+          "node_modules/bootstrap/dist/css/bootstrap.css"
         ],
         "scripts": []
       },
