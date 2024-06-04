@@ -17,7 +17,11 @@
         "tsConfig": "apps/facade/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/facade/src/favicon.ico", "apps/facade/src/assets"],
-        "styles": ["apps/facade/src/styles.scss"],
+        "styles": [
+          "apps/facade/src/styles.scss",
+          "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+          "node_modules/bootstrap/dist/css/bootstrap.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
