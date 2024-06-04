@@ -1,0 +1,33 @@
+{
+  "name": "facade-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/facade-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/facade-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "facade:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "facade:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "facade:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/facade-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["facade"]
+}
