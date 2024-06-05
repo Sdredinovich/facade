@@ -7,6 +7,7 @@ import {
 } from '@taiga-ui/core';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -14,7 +15,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     TuiRootModule,
     TuiDialogModule,
-    TuiAlertModule
+    TuiAlertModule,
+    TranslateModule
   ],
   selector: 'facade-root',
   templateUrl: './app.component.html',
@@ -22,5 +24,11 @@ import { RouterModule } from '@angular/router';
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
 })
 export class AppComponent {
-  title = 'facade';
+constructor(private translate: TranslateService) {
+  this.translate.setDefaultLang('en');
+}
+
+ngOnInit() {
+  this.translate.use('ru');
+}
 }
