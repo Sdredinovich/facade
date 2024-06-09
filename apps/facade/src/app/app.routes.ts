@@ -5,7 +5,12 @@ export const appRoutes: Route[] = [
     path: '',
     loadComponent: ()=>import('./authorized-user-layout/authorized-user-layout.component').then((m) => m.AuthorizedUserLayoutComponent),
     // canActivate: [authGuard],
+    pathMatch: 'full',
 
+  },
+  {
+    path: 'login',
+    loadComponent: ()=>import('@facade/feature-auth').then((m) => m.LoginPageComponent),
   },
   {
     path: '**',

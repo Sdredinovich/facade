@@ -1,1 +1,7 @@
-{"stranitsa-ne-najdena": "Page not found", "Nazad": "Back"}
+{
+  "страница не найдена": "Page not found",
+  "назад": "Back",
+  "войти": "Log in",
+  "логин": "Login",
+  "пароль": "Password"
+}

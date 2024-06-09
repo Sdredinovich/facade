@@ -1,0 +1,42 @@
+<div
+  class="d-flex vh-100 flex-column justify-content-center align-items-center"
+>
+  <div class="row">
+    <div class="col-12">
+      <p class="text-center tui-form__header">Login</p>
+    </div>
+  </div>
+
+  <div class="row col-5">
+    <div>
+      <form [formGroup]="form">
+        <tui-input
+          class="mb-2"
+          formControlName="login"
+          [tuiTextfieldCleaner]="true"
+        >
+          {{ 'логин' | translate }} <span class="tui-required"></span>
+          <input maxlength="20" tuiTextfield />
+        </tui-input>
+        <tui-input-password
+          class="mb-2"
+          formControlName="password"
+          [tuiTextfieldCleaner]="true"
+        >
+          {{ 'Пароль' | translate }} <span class="tui-required"></span>
+          <input maxlength="20" tuiTextfield />
+        </tui-input-password>
+        <button
+          type="submit"
+          appearance="primary"
+          tuiButton
+          class="w-100"
+          [disabled]="form.invalid"
+          (click)="login()"
+        >
+          {{ 'ВОЙТИ' | translate }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

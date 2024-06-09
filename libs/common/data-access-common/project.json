@@ -1,0 +1,27 @@
+{
+  "name": "data-access-common",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/common/data-access-common/src",
+  "prefix": "facade",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/common/data-access-common/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/common/data-access-common/**/*.ts",
+          "libs/common/data-access-common/**/*.html"
+        ]
+      }
+    }
+  }
+}
