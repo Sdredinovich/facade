@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import {TuiBlockStatusModule} from '@taiga-ui/layout';
 import { TuiButtonModule } from '@taiga-ui/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -13,4 +16,11 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './not-found.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFoundComponent {}
+export class NotFoundComponent {
+  constructor(private location: Location, private router: Router) {}
+
+  goBack(): void {
+    this.location.back();
+  }
+
+}

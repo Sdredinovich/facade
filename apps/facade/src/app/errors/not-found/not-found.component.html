@@ -8,7 +8,12 @@
 
   <h4>{{ 'страница не найдена' | translate }}</h4>
 
-  <button icon="tuiIconArrowLeft" appearance="secondary" tuiButton>
+  <button
+    icon="tuiIconArrowLeft"
+    appearance="secondary"
+    tuiButton
+    (click)="goBack()"
+  >
     {{ 'назад' | translate }}
   </button>
 </tui-block-status>
