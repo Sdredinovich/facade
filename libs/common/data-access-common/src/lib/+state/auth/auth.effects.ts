@@ -51,7 +51,7 @@ export const loginSuccessEffect$ = createEffect(
       ofType(AuthActions.loginSuccess),
       tap((action) => {
         localStorageJwtService.setItem(action.res.authToken);
-        router.navigateByUrl('/profile');
+        router.navigateByUrl('/home');
       })
     );
   },

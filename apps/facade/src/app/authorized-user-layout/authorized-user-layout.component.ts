@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthFacade } from 'libs/common/data-access-common/src/lib/+state/auth/auth.facade';
 
 @Component({
   selector: 'facade-authorized-user-layout',
@@ -9,4 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './authorized-user-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthorizedUserLayoutComponent {}
+export class AuthorizedUserLayoutComponent {
+  authFacade = inject(AuthFacade)
+
+
+goBack(){
+  this.authFacade.logout()
+
+}
+}

@@ -1,3 +1,3 @@
-// export * from './lib/data-access-common/data-access-common.component';
+export * from './lib/+state/auth/auth.reducer';
 export * as authEffects from './lib/+state/auth/auth.effects';
 

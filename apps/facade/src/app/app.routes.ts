@@ -1,16 +1,23 @@
+import { authGuard } from './../../../../libs/common/data-access-common/src/lib/guards/auth-guard.guard';
+import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
   {
     path: '',
-    loadComponent: ()=>import('./authorized-user-layout/authorized-user-layout.component').then((m) => m.AuthorizedUserLayoutComponent),
-    // canActivate: [authGuard],
+    redirectTo: 'login',
     pathMatch: 'full',
-
+  },
+  {
+    path: 'home',
+    loadComponent: () => AuthorizedUserLayoutComponent,
+    canActivate: [authGuard],
+    children: [],
   },
   {
     path: 'login',
-    loadComponent: ()=>import('@facade/feature-auth').then((m) => m.LoginPageComponent),
+    loadComponent: () =>
+      import('@facade/feature-auth').then((m) => m.LoginPageComponent),
   },
   {
     path: '**',
