@@ -9,8 +9,8 @@ export class AuthFacade {
 
 
 
-  logIn(userData: { login: string; password: string }) {
-    this.store.dispatch(AuthActions.login({ userData }))
+  logIn(userData: { login: string; password: string }, fn: () => void) {
+    this.store.dispatch(AuthActions.login({ userData, fn }))
   }
 
   public logout() {

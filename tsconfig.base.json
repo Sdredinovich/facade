@@ -18,6 +18,9 @@
       "@facade/common/data-access-common": [
         "libs/common/data-access-common/src/index.ts"
       ],
+      "@facade/common/feature-layouts": [
+        "libs/common/feature-layouts/src/index.ts"
+      ],
       "@facade/feature-auth": ["libs/feature-auth/src/index.ts"],
       "@facade/ui/components": ["libs/ui/components/src/index.ts"]
     }

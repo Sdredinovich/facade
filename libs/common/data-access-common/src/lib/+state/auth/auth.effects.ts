@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthActions } from './auth.actions';
 import { of, switchMap, tap } from 'rxjs';
 import { admin, user } from './auth-mock';
-import { LocalStorageJwtService } from '../../services/loacal-storage-jwt.services';
+import { LocalStorageJwtService } from '../../services/loacal-storage-jwt.service';
 import { Router } from '@angular/router';
 
 export const loginEffect$ = createEffect(
@@ -36,6 +36,8 @@ export const loginEffect$ = createEffect(
             })
           );
         }
+
+        payload.fn()
 
         return of(
           AuthActions.loginFailure({ error: new Error('Login failed') })

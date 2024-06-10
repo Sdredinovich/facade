@@ -1,5 +1,4 @@
-import { authGuard } from './../../../../libs/common/data-access-common/src/lib/guards/auth-guard.guard';
-import { AuthorizedUserLayoutComponent } from './authorized-user-layout/authorized-user-layout.component';
+import { authGuard } from '@facade/common/data-access-common';
 import { Route } from '@angular/router';
 
 export const appRoutes: Route[] = [
@@ -10,7 +9,10 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'home',
-    loadComponent: () => AuthorizedUserLayoutComponent,
+    loadComponent: () =>
+      import('@facade/common/feature-layouts').then(
+        (m) => m.InnerLayoutComponent
+      ),
     canActivate: [authGuard],
     children: [],
   },

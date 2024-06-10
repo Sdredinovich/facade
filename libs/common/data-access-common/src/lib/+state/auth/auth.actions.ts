@@ -4,7 +4,7 @@ import { SignAuthPayload, SignAuthUser } from './sign.auth.model';
 export const AuthActions = createActionGroup({
   source: 'Auth',
   events: {
-    login: props<{ userData: SignAuthPayload }>(),
+    login: props<{ userData: SignAuthPayload, fn: () => void }>(),
     loginSuccess: props<{ res: SignAuthUser }>(),
     loginFailure: props<{ error: Error }>(),
 
