@@ -1,16 +1,32 @@
-:host{
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
+.inner-layout {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: calc(100% - 60px);
+  position: relative;
+  margin: 8px;
+
+  header {
+    position: sticky;
+    top: 8px;
+    height: 56px;
+    width: 100%;
+  }
+
+  content {
+    flex: 1;
+    margin-top: 56px;
+  }
 }
 
-header{
-position: fixed;
-width: 100%;
-height: 80px;
-}
-
-content{
-  flex: 1;
-  margin-top: 80px;
+.nav {
+  position: sticky;
+  top: 0;
+  width: 60px;
+  height: 100vh;
+  border: 1px solid red;
 }
