@@ -6,13 +6,17 @@ import {
   TUI_SANITIZER,
   TuiThemeNightModule,
 } from '@taiga-ui/core';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import {
-  TuiThemeNightService
-} from '@taiga-ui/addon-doc/services'
+import { TuiThemeNightService } from '@taiga-ui/addon-doc/services';
 import { CommonModule } from '@angular/common';
+import { AuthFacade } from '@facade/common/data-access-common';
 
 @Component({
   standalone: true,
@@ -23,7 +27,7 @@ import { CommonModule } from '@angular/common';
     TuiAlertModule,
     TranslateModule,
     TuiThemeNightModule,
-    CommonModule
+    CommonModule,
   ],
   selector: 'facade-root',
   templateUrl: './app.component.html',
@@ -34,8 +38,11 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   translate = inject(TranslateService);
   night$ = inject(TuiThemeNightService);
+  authFacade = inject(AuthFacade);
 
   ngOnInit() {
+    this.authFacade.getUser();
     this.translate.use('ru');
   }
 }
+

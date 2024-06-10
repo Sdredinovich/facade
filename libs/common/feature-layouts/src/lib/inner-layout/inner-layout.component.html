@@ -1,103 +1,102 @@
-<nav class="nav">
-  ccc
-</nav>
+<nav class="nav">ccc</nav>
 <div class="inner-layout">
-<header class="d-flex justify-content-end">
-  <tui-hosted-dropdown
-    tuiDropdownAlign="right"
-    [content]="langDropdown"
-    [(open)]="langOpened"
-  >
+  <header class="d-flex justify-content-end">
+    <tui-hosted-dropdown
+      tuiDropdownAlign="right"
+      [content]="langDropdown"
+      [(open)]="langOpened"
+    >
+      <button
+        tuiButton
+        icon="tuiIconGlobeLarge"
+        type="button"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+        {{ translate.currentLang | uppercase }}
+      </button>
+    </tui-hosted-dropdown>
+
+    <ng-template #langDropdown>
+      <tui-data-list style="min-width: 120px">
+        <button tuiOption (click)="useLang('ru')">
+          {{ 'русский' | translate }}
+        </button>
+        <button tuiOption (click)="useLang('en')">
+          {{ 'английский' | translate }}
+        </button>
+      </tui-data-list>
+    </ng-template>
+
     <button
-      tuiButton
-      icon="tuiIconGlobeLarge"
+      tuiIconButton
       type="button"
       class="tui-space_right-3 tui-space_bottom-3"
+      [icon]="night$.value ? 'tuiIconSun' : 'tuiIconMoon'"
+      (click)="night$.toggle()"
+    ></button>
+
+    <button
+      *ngIf="authFacade.loggedUser$ | async as user"
+      iconRight="tuiIconLogOutLarge"
+      tuiButton
+      type="button"
+      class="tui-space_bottom-3"
+      (click)="logout()"
     >
-      {{ translate.currentLang | uppercase }}
+      {{ user.name }}
     </button>
-  </tui-hosted-dropdown>
+  </header>
+  <content>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
+    <p>awfawfwaf</p>
 
-  <ng-template #langDropdown>
-    <tui-data-list style="min-width: 120px">
-      <button tuiOption (click)="useLang('ru')">
-        {{ 'русский' | translate }}
-      </button>
-      <button tuiOption (click)="useLang('en')">
-        {{ 'английский' | translate }}
-      </button>
-    </tui-data-list>
-  </ng-template>
-
-  <button
-    tuiIconButton
-    type="button"
-    class="tui-space_right-3 tui-space_bottom-3"
-    [icon]="night$.value ? 'tuiIconSun' : 'tuiIconMoon'"
-    (click)="night$.toggle()"
-  ></button>
-
-  <button
-  icon="tuiIconLogOutLarge"
-  tuiIconButton
-  type="button"
-  class=" tui-space_bottom-3"
-  (click)="logout()"
-></button>
-</header>
-<content
-  >
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-  <p>awfawfwaf</p>
-
-  <router-outlet></router-outlet>
-</content>
-<footer>fefef</footer>
+    <router-outlet></router-outlet>
+  </content>
+  <footer>fefef</footer>
 </div>
-

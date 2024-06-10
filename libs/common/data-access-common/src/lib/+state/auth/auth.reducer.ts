@@ -43,6 +43,14 @@ export const reducer = createReducer(
     ...state,
     ...authInitialState,
   })),
+  on(AuthActions.getUser, (state) => ({
+    ...state,
+  })),
+  on(AuthActions.getUserSuccess, (state, { user }) => ({
+    ...state,
+    authStatus: LoadingStatus.LOADED,
+    loggedUser: user,
+  })),
 );
 
 export const authFeature = createFeature({

@@ -4,7 +4,6 @@ import {
 
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
 } from '@angular/core';
@@ -40,7 +39,6 @@ import { RouterOutlet } from '@angular/router';
 export class InnerLayoutComponent {
   translate = inject(TranslateService);
   authFacade = inject(AuthFacade);
-  cdr = inject(ChangeDetectorRef);
   night$ = inject(TuiThemeNightService);
   langOpened = false;
 

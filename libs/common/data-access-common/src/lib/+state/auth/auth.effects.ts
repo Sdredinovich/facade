@@ -1,10 +1,12 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthActions } from './auth.actions';
-import { of, switchMap, tap } from 'rxjs';
+import { of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { admin, user } from './auth-mock';
 import { LocalStorageJwtService } from '../../services/loacal-storage-jwt.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectAuthStatus } from './auth.selectors';
 
 export const loginEffect$ = createEffect(
   (actions$ = inject(Actions)) =>
@@ -37,7 +39,7 @@ export const loginEffect$ = createEffect(
           );
         }
 
-        payload.fn()
+        payload.fn();
 
         return of(
           AuthActions.loginFailure({ error: new Error('Login failed') })
@@ -48,7 +50,11 @@ export const loginEffect$ = createEffect(
 );
 
 export const loginSuccessEffect$ = createEffect(
-  (actions$ = inject(Actions), localStorageJwtService = inject(LocalStorageJwtService), router = inject(Router)) => {
+  (
+    actions$ = inject(Actions),
+    localStorageJwtService = inject(LocalStorageJwtService),
+    router = inject(Router)
+  ) => {
     return actions$.pipe(
       ofType(AuthActions.loginSuccess),
       tap((action) => {
@@ -60,9 +66,12 @@ export const loginSuccessEffect$ = createEffect(
   { functional: true, dispatch: false }
 );
 
-
 export const logoutEffect$ = createEffect(
-  (actions$ = inject(Actions), jwtService = inject(LocalStorageJwtService), router = inject(Router)) =>
+  (
+    actions$ = inject(Actions),
+    jwtService = inject(LocalStorageJwtService),
+    router = inject(Router)
+  ) =>
     actions$.pipe(
       ofType(AuthActions.logout),
       tap(() => {
@@ -73,4 +82,25 @@ export const logoutEffect$ = createEffect(
       })
     ),
   { functional: true, dispatch: false }
+);
+
+export const getUser$ = createEffect(
+  (
+    localStorageJwtService = inject(LocalStorageJwtService),
+    actions$ = inject(Actions),
+    store = inject(Store)
+  ) =>
+    actions$.pipe(
+      ofType(AuthActions.getUser),
+      withLatestFrom(store.select(selectAuthStatus)),
+      switchMap(([, authStatus]) => {
+        if (authStatus !== 'loaded') {
+          return localStorageJwtService.getItem() === 'adminToken'
+            ? of(AuthActions.getUserSuccess({ user: admin }))
+            : of(AuthActions.getUserSuccess({ user: user }));
+        }
+        return of();
+      })
+    ),
+  { functional: true }
 );

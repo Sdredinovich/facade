@@ -1,4 +1,5 @@
 export * from './lib/+state/auth/auth.reducer';
+export * from './lib/+state/auth/auth.selectors';
 export * from './lib/+state/auth/auth.facade';
 export * from './lib/guards/auth-guard.guard';
 export * from './lib/services/loacal-storage-jwt.service';
