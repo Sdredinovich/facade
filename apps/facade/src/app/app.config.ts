@@ -1,3 +1,4 @@
+import { authFeature } from '../../../../libs/common/data-access-common/src/lib/+state/auth/auth.reducer';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TuiRootModule } from '@taiga-ui/core';
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
@@ -11,6 +12,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { authEffects } from '@facade/common/data-access-common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -18,9 +20,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideEffects(),
+    provideEffects(
+      authEffects
+    ),
     provideStore({
-      router: routerReducer
+      router: routerReducer,
+      [authFeature.name]: authFeature.reducer,
     }),
     provideRouterStore(),
     provideStoreDevtools({

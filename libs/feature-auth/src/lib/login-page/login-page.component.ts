@@ -1,10 +1,11 @@
+import { AuthFacade } from './../../../../common/data-access-common/src/lib/+state/auth/auth.facade';
 import { TranslateModule } from '@ngx-translate/core';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
+  // FormControl,
+  // FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -30,20 +31,26 @@ import { TuiButtonModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent {
+  authFacade = inject(AuthFacade);
+
   private fb = inject(FormBuilder);
-  form!: FormGroup<{
-    login: FormControl<string | null>;
-    password: FormControl<string | null>;
-  }>;
+  form = this.fb.group({
+    login: ['admin', Validators.required],
+    password: ['admin', Validators.required],
+  });
 
   constructor() {
-    this.form = this.fb.group({
-      login: [null as string | null, Validators.required],
-      password: [null as string | null, Validators.required],
-    });
+    // this.form = this.fb.group({
+    //   login: ['admin', Validators.required],
+    //   password: ['admin', Validators.required],
+    // });
   }
 
   login() {
-    console.log(this.form.value)
+    console.log(this.form.value);
+    this.authFacade.logIn(this.form.value as {
+      login: string;
+      password: string;
+  } );
   }
 }
