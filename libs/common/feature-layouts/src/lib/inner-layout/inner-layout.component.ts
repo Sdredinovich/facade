@@ -2,8 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
-  OnInit,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,11 +12,10 @@ import {
 } from '@taiga-ui/core';
 import { AuthFacade } from '@facade/common/data-access-common';
 import {
-  LangChangeEvent,
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { Subject, takeUntil } from 'rxjs';
+
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -36,37 +33,19 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './inner-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InnerLayoutComponent implements OnDestroy, OnInit {
+export class InnerLayoutComponent {
   translate = inject(TranslateService);
   authFacade = inject(AuthFacade);
   cdr = inject(ChangeDetectorRef);
 
   langOpened = false;
 
-  currentLang = '';
-
-  destroy$ = new Subject<void>();
-
-  ngOnInit() {
-    this.currentLang = this.translate.currentLang || this.translate.defaultLang;
-    this.translate.onLangChange.pipe(takeUntil(this.destroy$)).subscribe((event: LangChangeEvent) => {
-      this.currentLang = event.lang;
-    });
-  }
-
   logout() {
     this.authFacade.logout();
   }
 
-  ru() {
-    this.translate.use('ru');
-  }
-  en() {
-    this.translate.use('en');
+  useLang(lang: string ) {
+    this.translate.use(lang);
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }
