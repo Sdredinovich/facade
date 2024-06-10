@@ -13,7 +13,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 
-import { TuiAlertService, TuiRootModule } from '@taiga-ui/core';
+import { TuiAlertService, TuiRootModule, TuiThemeNightModule } from '@taiga-ui/core';
 
 import { authEffects, authFeature } from '@facade/common/data-access-common';
 
@@ -46,6 +46,7 @@ export const appConfig: ApplicationConfig = {
       HttpClientModule,
       TuiRootModule,
       TuiAlertService,
+      TuiThemeNightModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,

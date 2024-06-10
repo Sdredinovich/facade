@@ -2,8 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -47,10 +45,7 @@ export class LoginPageComponent implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
-  form: FormGroup<{
-    login: FormControl<string>;
-    password: FormControl<string>;
-  }> = this.fb.group(
+  form = this.fb.group(
     {
       login: ['admin', Validators.required],
       password: ['admin', Validators.required],
@@ -65,18 +60,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   login() {
-    this.authFacade.logIn(
-      this.form.value as {
-        login: string;
-        password: string;
-      },
-      this.loginError
-    );
+    this.authFacade.logIn(this.form.value, this.loginError);
   }
 
   loginError = () => {
     this.alertService
-      .open('Неверный пароль или логин', {
+      .open('Неверный логин или пароль', {
         status: 'error',
       })
       .subscribe();

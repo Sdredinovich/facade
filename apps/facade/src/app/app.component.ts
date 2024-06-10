@@ -4,10 +4,15 @@ import {
   TuiDialogModule,
   TuiAlertModule,
   TUI_SANITIZER,
+  TuiThemeNightModule,
 } from '@taiga-ui/core';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  TuiThemeNightService
+} from '@taiga-ui/addon-doc/services'
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -16,22 +21,21 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
-    TranslateModule
+    TranslateModule,
+    TuiThemeNightModule,
+    CommonModule
   ],
   selector: 'facade-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   changeDetection: ChangeDetectionStrategy.OnPush,
-
 })
-export class AppComponent {
-  
-constructor(private translate: TranslateService) {
-  this.translate.setDefaultLang('en');
-}
+export class AppComponent implements OnInit {
+  translate = inject(TranslateService);
+  night$ = inject(TuiThemeNightService);
 
-ngOnInit() {
-  this.translate.use('ru');
-}
+  ngOnInit() {
+    this.translate.use('ru');
+  }
 }

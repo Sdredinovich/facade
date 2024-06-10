@@ -1,4 +1,8 @@
 import {
+  TuiThemeNightService
+} from '@taiga-ui/addon-doc/services'
+
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -27,7 +31,7 @@ import { RouterOutlet } from '@angular/router';
     TuiHostedDropdownModule,
     TuiDataListModule,
     TranslateModule,
-    RouterOutlet
+    RouterOutlet,
   ],
   templateUrl: './inner-layout.component.html',
   styleUrl: './inner-layout.component.scss',
@@ -37,7 +41,7 @@ export class InnerLayoutComponent {
   translate = inject(TranslateService);
   authFacade = inject(AuthFacade);
   cdr = inject(ChangeDetectorRef);
-
+  night$ = inject(TuiThemeNightService);
   langOpened = false;
 
   logout() {
