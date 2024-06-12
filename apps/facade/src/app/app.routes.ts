@@ -8,13 +8,24 @@ export const appRoutes: Route[] = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'dashboard',
     loadComponent: () =>
       import('@facade/common/feature-layouts').then(
         (m) => m.InnerLayoutComponent
       ),
     canActivate: [authGuard],
-    children: [],
+    children: [
+      {
+        path: '',
+        redirectTo: 'homePage',
+        pathMatch: 'full',
+      },
+      {
+        path: 'homePage',
+        loadComponent: () =>
+          import('@facade/system-feature/feature-homePage').then(m=>m.FeatureHomePageComponent)
+      }
+    ],
   },
   {
     path: 'login',

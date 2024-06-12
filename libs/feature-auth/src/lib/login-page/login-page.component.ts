@@ -55,7 +55,7 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     if (this.storage.getItem()) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard/homePage']);
     }
   }
 

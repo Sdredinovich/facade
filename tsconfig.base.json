@@ -22,6 +22,9 @@
         "libs/common/feature-layouts/src/index.ts"
       ],
       "@facade/feature-auth": ["libs/feature-auth/src/index.ts"],
+      "@facade/system-feature/feature-homePage": [
+        "libs/system-feature/feature-homePage/src/index.ts"
+      ],
       "@facade/ui/components": ["libs/ui/components/src/index.ts"]
     }
   },
