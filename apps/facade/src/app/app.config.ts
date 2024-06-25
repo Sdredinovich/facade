@@ -18,6 +18,8 @@ import { TuiAlertService, TuiRootModule, TuiThemeNightModule } from '@taiga-ui/c
 import { authEffects, authFeature } from '@facade/common/data-access-common';
 
 import { appRoutes } from './app.routes';
+import { WebsocketModule } from '@facade/common/websocket';
+import { environment } from '../environments/environment.prod';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +55,10 @@ export const appConfig: ApplicationConfig = {
           useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
-      })
+      }),
+      WebsocketModule.config({
+        url: environment.ws
+    })
     ),
   ],
 };

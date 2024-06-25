@@ -21,6 +21,7 @@
       "@facade/common/feature-layouts": [
         "libs/common/feature-layouts/src/index.ts"
       ],
+      "@facade/common/websocket": ["libs/common/websocket/src/index.ts"],
       "@facade/feature-auth": ["libs/feature-auth/src/index.ts"],
       "@facade/system-feature/feature-homePage": [
         "libs/system-feature/feature-homePage/src/index.ts"
