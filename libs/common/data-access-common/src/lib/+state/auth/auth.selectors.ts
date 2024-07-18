@@ -8,4 +8,4 @@ import { authFeature } from "./auth.reducer";
 // );
 
 
-export const { selectAuthStatus, selectAuthToken, selectError, selectLoggedUser, selectAuthState } = authFeature;
+export const { selectAuthStatus, selectAuthToken, selectError, selectLoggedUser, selectAuthState, selectCaptcha } = authFeature;

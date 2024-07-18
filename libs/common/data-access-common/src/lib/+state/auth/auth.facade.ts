@@ -1,24 +1,22 @@
-import { Injectable, inject } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { AuthActions } from "./auth.actions";
+import { Injectable, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AuthActions } from './auth.actions';
 import * as AuthSelectors from './auth.selectors';
-
+import { AuthPayload } from './auth.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthFacade {
+  store = inject(Store);
 
-  store = inject(Store)
+  loggedUser$ = this.store.select(AuthSelectors.selectLoggedUser);
+  captcha$ = this.store.select(AuthSelectors.selectCaptcha);
 
-  loggedUser$ = this.store.select(AuthSelectors.selectLoggedUser)
-
-
-
-  logIn(userData: { login: string; password: string }, fn: () => void) {
-    this.store.dispatch(AuthActions.login({ userData, fn }))
+  logIn(userData: AuthPayload, fn: (text: string) => void) {
+    this.store.dispatch(AuthActions.login({ userData, fn }));
   }
 
-  getUser(){
-    this.store.dispatch(AuthActions.getUser())
+  auth() {
+    this.store.dispatch(AuthActions.auth());
   }
 
   public logout() {

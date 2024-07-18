@@ -1,7 +1,7 @@
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient,  provideHttpClient, withInterceptors } from '@angular/common/http';
 
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 
 import { TuiAlertService, TuiRootModule, TuiThemeNightModule } from '@taiga-ui/core';
 
-import { authEffects, authFeature } from '@facade/common/data-access-common';
+import { authEffects, authFeature, authInterceptor } from '@facade/common/data-access-common';
 
 import { appRoutes } from './app.routes';
 import { WebsocketModule } from '@facade/common/websocket';
@@ -44,8 +44,8 @@ export const appConfig: ApplicationConfig = {
     }),
     provideAnimations(),
     provideRouter(appRoutes),
+    provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(
-      HttpClientModule,
       TuiRootModule,
       TuiAlertService,
       TuiThemeNightModule,

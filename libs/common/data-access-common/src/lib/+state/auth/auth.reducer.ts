@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { AuthActions } from './auth.actions';
-import { User } from './sign.auth.model';
+import { AuthUserData } from './auth.model';
 
 // export type LoadingStatus = 'init' | 'loading' | 'loaded' | 'error';
 
@@ -15,42 +15,68 @@ export const authFeatureKey = 'auth';
 
 export interface authState {
   authStatus: LoadingStatus;
-  error: string | null;
+  error: Error | null;
   authToken: string;
-  loggedUser: User;
+  loggedUser: AuthUserData | null;
+  captcha: string | null;
 }
 
 export const authInitialState: authState = {
   authStatus: LoadingStatus.INIT,
   error: null,
   authToken: '',
-  loggedUser: { login: '', email: '', name: '', city: '', id: 0 },
+  loggedUser: null,
+  captcha: null,
 };
 
 export const reducer = createReducer(
   authInitialState,
+  on(AuthActions.auth, (state) => ({
+    ...state,
+    authStatus: LoadingStatus.LOADING,
+  })),
+  on(AuthActions.authSuccess, (state, { res }) => ({
+    ...state,
+    authStatus: LoadingStatus.LOADED,
+    loggedUser: res.data,
+  })),
+  on(AuthActions.authFailure, (state, { error }) => ({
+    ...state,
+    authStatus: LoadingStatus.ERROR,
+    error,
+  })),
+  // ====================
   on(AuthActions.login, (state) => ({
     ...state,
     authStatus: LoadingStatus.LOADING,
   })),
-  on(AuthActions.loginSuccess, (state, { res }) => ({
+  on(AuthActions.loginSuccess, (state) => ({
     ...state,
     authStatus: LoadingStatus.LOADED,
-    authToken: res.authToken,
-    loggedUser: res.user,
   })),
+  // ===================
+
   on(AuthActions.logout, (state) => ({
     ...state,
     ...authInitialState,
   })),
-  on(AuthActions.getUser, (state) => ({
+  on(AuthActions.logoutSuccess, (state) => ({
     ...state,
+    ...authInitialState,
   })),
-  on(AuthActions.getUserSuccess, (state, { user }) => ({
+
+  // ================
+
+  on(AuthActions.getCaptcha, (state) => ({
     ...state,
+    authStatus: LoadingStatus.LOADING,
+  })),
+
+  on(AuthActions.getCaptchaSuccess, (state, { captcha }) => ({
+    ...state,
+    captcha,
     authStatus: LoadingStatus.LOADED,
-    loggedUser: user,
-  })),
+  }))
 );
 
 export const authFeature = createFeature({

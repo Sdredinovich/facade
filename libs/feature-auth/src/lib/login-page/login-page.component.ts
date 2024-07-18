@@ -1,26 +1,26 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormBuilder,
   FormsModule,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
+import {
+  TuiCheckboxLabeledModule,
+  TuiInputModule,
+  TuiInputPasswordModule,
+} from '@taiga-ui/kit';
 import {
   TuiAlertService,
   TuiButtonModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 
-import {
-  AuthFacade,
-  LocalStorageJwtService,
-} from '@facade/common/data-access-common';
+import { AuthFacade, AuthPayload } from '@facade/common/data-access-common';
 
 @Component({
   selector: 'facade-login-page',
@@ -34,38 +34,39 @@ import {
     TuiTextfieldControllerModule,
     TuiButtonModule,
     TranslateModule,
+    TuiCheckboxLabeledModule,
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
 })
 export class LoginPageComponent implements OnInit {
-  private authFacade = inject(AuthFacade);
-  private storage = inject(LocalStorageJwtService);
+  authFacade = inject(AuthFacade);
   private alertService = inject(TuiAlertService);
   private router = inject(Router);
-  private fb = inject(FormBuilder);
+  private fb = inject(NonNullableFormBuilder);
 
-  form = this.fb.group(
-    {
-      login: ['admin', Validators.required],
-      password: ['admin', Validators.required],
-    },
-    { nonNullable: true }
-  );
+  form = this.fb.group<AuthPayload>({
+    email: 'sedredinovich@gmail.com',
+    password: 'saashdSa12_',
+    rememberMe: false,
+    captcha: null,
+  });
 
   ngOnInit() {
-    if (this.storage.getItem()) {
-      this.router.navigate(['/dashboard/homePage']);
-    }
+    this.authFacade.loggedUser$.subscribe((user) => {
+      if (user) {
+        this.router.navigate(['/dashboard/homePage']);
+      }
+    });
   }
 
   login() {
-    this.authFacade.logIn(this.form.value, this.loginError);
+    this.authFacade.logIn(this.form.value as AuthPayload, this.loginError);
   }
 
-  loginError = () => {
+  loginError = (text: string) => {
     this.alertService
-      .open('Неверный логин или пароль', {
+      .open(text, {
         status: 'error',
       })
       .subscribe();

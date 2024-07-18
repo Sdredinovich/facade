@@ -12,20 +12,29 @@
       <form [formGroup]="form">
         <tui-input
           class="mb-2"
-          formControlName="login"
+          type="email"
+          formControlName="email"
           [tuiTextfieldCleaner]="true"
         >
           {{ 'логин' | translate }} <span class="tui-required"></span>
-          <input maxlength="20" tuiTextfield />
+          <input maxlength="30" tuiTextfield />
         </tui-input>
         <tui-input-password
           class="mb-2"
+          type="password"
           formControlName="password"
           [tuiTextfieldCleaner]="true"
         >
           {{ 'Пароль' | translate }} <span class="tui-required"></span>
-          <input maxlength="20" tuiTextfield />
+          <input maxlength="30" tuiTextfield />
         </tui-input-password>
+        <tui-checkbox-labeled formControlName="rememberMe" class="mb-2">{{
+          'запомнить меня' | translate
+        }}</tui-checkbox-labeled>
+        <div class="w-50" *ngIf="authFacade.captcha$ | async as captcha">
+          <img [src]="captcha" />
+          <tui-input formControlName="captcha"> </tui-input>
+        </div>
         <button
           type="submit"
           appearance="primary"

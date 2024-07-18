@@ -41,8 +41,7 @@ export class AppComponent implements OnInit {
   authFacade = inject(AuthFacade);
 
   ngOnInit() {
-    this.authFacade.getUser();
+    this.authFacade.auth();
     this.translate.use('ru');
   }
 }
-

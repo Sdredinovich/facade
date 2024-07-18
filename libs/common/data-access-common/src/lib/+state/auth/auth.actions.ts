@@ -1,26 +1,23 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { SignAuthPayload, SignAuthUser, User } from './sign.auth.model';
+import { AuthPayload, AuthResponse } from './auth.model';
 
 export const AuthActions = createActionGroup({
   source: 'Auth',
   events: {
-    login: props<{ userData: SignAuthPayload, fn: () => void }>(),
-    loginSuccess: props<{ res: SignAuthUser }>(),
+    auth: emptyProps(),
+    authSuccess: props<{ res: AuthResponse }>(),
+    authFailure: props<{ error: Error }>(),
+
+    login: props<{ userData: AuthPayload; fn: (text: string) => void }>(),
+    loginSuccess: emptyProps(),
     loginFailure: props<{ error: Error }>(),
 
     logout: emptyProps(),
+    logoutSuccess: emptyProps(),
 
-    getUser: emptyProps(),
-    getUserSuccess: props<{ user: User }>(),
-    getUserFailure: props<{ error: Error }>(),
-
-
-
-
+    getCaptcha: emptyProps(),
+    getCaptchaSuccess: props<{ captcha: string }>(),
 
 
   },
-})
-
-
-
+});

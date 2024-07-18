@@ -1,14 +1,19 @@
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LocalStorageJwtService } from '../services/loacal-storage-jwt.service';
+import { AuthFacade } from '../+state/auth/auth.facade';
+import { map } from 'rxjs';
 
 export const authGuard = () => {
   const router = inject(Router);
-  const storage = inject(LocalStorageJwtService);
+  const auth = inject(AuthFacade);
 
-  if (!storage.getItem()) {
-    router.navigate(['/login']);
-    return false;
-  }
-  return true;
+  return auth.loggedUser$.pipe(
+    map((user) => {
+      if (!user) {
+        router.navigate(['/login']);
+        return false;
+      }
+      return true;
+    })
+  );
 };
