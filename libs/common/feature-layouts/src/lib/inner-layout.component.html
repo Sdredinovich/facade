@@ -1,17 +1,12 @@
-<nav class="nav">ccc</nav>
+<facade-nav></facade-nav>
 <div class="inner-layout">
-  <header class="d-flex justify-content-end">
+  <header class="d-flex justify-content-end gap-2">
     <tui-hosted-dropdown
       tuiDropdownAlign="right"
       [content]="langDropdown"
       [(open)]="langOpened"
     >
-      <button
-        tuiButton
-        icon="tuiIconGlobeLarge"
-        type="button"
-        class="tui-space_right-3 tui-space_bottom-3"
-      >
+      <button tuiButton icon="tuiIconGlobeLarge" type="button">
         {{ translate.currentLang | uppercase }}
       </button>
     </tui-hosted-dropdown>
@@ -30,7 +25,6 @@
     <button
       tuiIconButton
       type="button"
-      class="tui-space_right-3 tui-space_bottom-3"
       [icon]="night$.value ? 'tuiIconSun' : 'tuiIconMoon'"
       (click)="night$.toggle()"
     ></button>
@@ -47,7 +41,7 @@
     </button>
   </header>
   <content>
+    <p>wdwdwdwdd</p>
     <router-outlet></router-outlet>
   </content>
-  <footer>fefef</footer>
 </div>

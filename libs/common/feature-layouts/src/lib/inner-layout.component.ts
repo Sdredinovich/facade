@@ -20,6 +20,7 @@ import {
 } from '@ngx-translate/core';
 
 import { RouterOutlet } from '@angular/router';
+import { NavComponent } from "./components/nav.component";
 
 @Component({
   selector: 'facade-inner-layout',
@@ -31,7 +32,8 @@ import { RouterOutlet } from '@angular/router';
     TuiDataListModule,
     TranslateModule,
     RouterOutlet,
-  ],
+    NavComponent
+],
   templateUrl: './inner-layout.component.html',
   styleUrl: './inner-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
