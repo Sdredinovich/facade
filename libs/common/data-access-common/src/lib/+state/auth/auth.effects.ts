@@ -11,7 +11,6 @@ export const loginEffect$ = createEffect(
     actions$.pipe(
       ofType(AuthActions.login),
       switchMap((payload) => {
-        console.log(payload.userData);
         return api
           .post<SignLoginResponse>(
             'https://social-network.samuraijs.com/api/1.0/auth/login',
